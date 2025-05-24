@@ -1,0 +1,6 @@
+grpcio==1.48.2
+grpcio-tools==1.48.2
+networkx==2.8.8
+matplotlib==3.6.2
+sqlite3==3.39.4
+tqdm==4.64.1

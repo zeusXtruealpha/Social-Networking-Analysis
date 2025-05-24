@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+service SocialGraph {
+    rpc Prepare (Transaction) returns (Vote);
+    rpc Commit (Transaction) returns (Ack);
+    rpc GetEdges (NodeId) returns (EdgeList);
+    rpc InsertData (Transaction) returns (Ack);
+    rpc RequestVote (VoteRequest) returns (VoteResponse);
+    rpc AppendEntries (AppendEntriesRequest) returns (AppendEntriesResponse);
+}
+
+message Transaction {
+    string timestamp = 1;
+    int32 node1 = 2;
+    int32 node2 = 3;
+    int32 weight = 4;
+}
+
+message Vote {
+    bool success = 1;
+    string message = 2;
+}
+
+message Ack {
+    bool success = 1;
+    string message = 2;
+}
+
+message NodeId {
+    int32 id = 1;
+}
+
+message Edge {
+    int32 node1 = 1;
+    int32 node2 = 2;
+    int32 weight = 3;
+}
+
+message EdgeList {
+    repeated Edge edges = 1;
+}
+
+message VoteRequest {
+    int32 term = 1;
+    string candidate_id = 2;
+}
+
+message VoteResponse {
+    int32 term = 1;
+    bool vote_granted = 2;
+}
+
+message AppendEntriesRequest {
+    int32 term = 1;
+    string leader_id = 2;
+}
+
+message AppendEntriesResponse {
+    int32 term = 1;
+    bool success = 2;
+}
